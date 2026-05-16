@@ -25,7 +25,6 @@ class _AiSummaryScreenState extends State<AiSummaryScreen> {
   // ── Replace with your actual Groq API key ───────────────────────────────
   // Get a FREE key at: https://console.groq.com → API Keys → Create API Key
   static const String _apiKey = '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';
-  // ─────────────────────────────────────────────────────────────────────────
 
   // Room pricing for revenue estimate (in PHP)
   static const Map<String, int> _roomRates = {
