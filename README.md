@@ -1,119 +1,82 @@
-# Hotel Management System — Check-In Log
+# 🏨 Velour Grand Hotel Management System
 
-## Business App Idea
-A Hotel Management System check-in log that allows hotel staff to record
-site visits, client interactions, and property inspections. Staff can
-capture photos, log GPS coordinates, and store room-specific details
-for accountability and record-keeping.
-
-## Collection Name & Fields
-**Collection:** `hotel_checkins`
-
-| Field        | Type      | Description                         |
-|--------------|-----------|-------------------------------------|
-| businessName | string    | Name of hotel/branch visited        |
-| note         | string    | Visit notes                         |
-| roomType     | string    | Room category (Deluxe, Suite, etc.) |
-| guestStatus  | string    | Check-In / Check-Out / Staying      |
-| photoUrl     | string    | Firebase Storage download URL       |
-| lat          | number    | GPS latitude                        |
-| lng          | number    | GPS longitude                       |
-| createdBy    | string    | Group identifier                    |
-| proofLabel   | string    | e.g. GroupName-Hotel-0423           |
-| createdAt    | timestamp | Server timestamp                    |
-
-## Steps to Run
-1. Clone the repo
-2. Run `flutter pub get`
-3. Add your own `google-services.json` (Android) — not committed
-4. Run `flutter run`
-
-## Screenshots
-- `screenshots/list_screen.png` — Log List with entries
-- `screenshots/add_screen.png` — Add screen with photo + location
-- `screenshots/firestore_doc.png` — Firestore document view# 🏨 Velour Grand — Hotel Management System
-
-A Flutter mobile application for hotel staff to manage and log guest check-ins, built with Firebase Authentication and Firestore.
+A **Flutter Android mobile app** built for hotel staff to manage guest check-ins, view AI-generated business reports, and interact with an AI-powered staff assistant chatbot.
 
 ---
 
-## 📱 Screens Overview
+## 👥 Group Members
 
-| Screen                     | Description                                 |
-|----------------------------|---------------------------------------------|
-| `welcome_screen.dart`      | Landing page with Sign In / Sign Up options |
-| `login_screen.dart`        | Firebase email & password authentication    |
-| `signup_screen.dart`       | New staff account registration              |
-| `checkin_list_screen.dart` | Live list of all guest check-ins            |
-| `add_checkin_screen.dart`  | Form to record a new guest check-in         |
+| Name | Role |
+| Ian Barredo | Backend Coding  |
+| Jay Leonard Iñigo | Backend Coding |
+| Mark Jolo Lañada | AI Features |
+| Jenelyn Miraflor | UI Design  |
+
+---
+
+## 📱 App Overview
+
+**App Name:** Velour Grand Hotel MS  
+**Business Type:** Hotel Management  
+**Target Users:** Hotel staff and administrators  
+**Platform:** Android Mobile App (Flutter)
+
+The Velour Grand Hotel Management System solves the problem of manual, paper-based guest check-in tracking. It allows hotel staff to digitally log guest check-ins, manage records, and gain AI-powered insights into daily hotel operations.
 
 ---
 
 ## ✨ Features
 
-- **Firebase Authentication** — Secure login and registration for hotel staff
-- **Firestore Real-time Sync** — Check-in records update live via `StreamBuilder`
-- **GPS Location Capture** — Records staff coordinates at the time of check-in using `geolocator`
-- **Photo Upload** — Attach proof photos from the device gallery via `image_picker`
-- **Auto Proof Label** — Each check-in is stamped with a unique label (e.g. `HMS-Hotel-0430`)
-- **Delete with Confirmation** — Records and associated photos can be removed with a confirmation dialog
-- **Logout** — Secure sign-out from the check-in list screen
+### 🔐 Authentication
+- Staff sign-up with full form validation (name, email, address, contact, birthdate, gender, password)
+- Secure login via Firebase Authentication
+- Logout with confirmation dialog
+
+### 📋 Guest Check-In Management (CRUD)
+- **Add** new guest check-in records with:
+  - Client name
+  - Room type (Deluxe, Suite, Standard)
+  - Guest status/category
+  - Photo from gallery
+  - GPS location capture
+- **View** all check-ins in a real-time scrollable list
+- **Delete** check-in records with confirmation
+- **Detail view** via bottom sheet modal
+
+### 🤖 AI Check-In Summary Report *(Semi-Final Feature)*
+- Reads all Firestore check-in data automatically
+- Sends data to **Groq AI (LLaMA 3.1)** for analysis
+- Generates a structured business report with:
+  - Total check-ins count
+  - Room type breakdown
+  - Guest status breakdown
+  - Revenue estimate (based on room rates)
+  - Management recommendations
+- Bold, professional UI with color-coded report sections
+
+### 💬 AI Staff Assistant Chatbot *(Semi-Final Feature)*
+- Loads all current check-in records as context
+- Staff can ask natural language questions about guests and hotel data
+- Examples: *"How many guests checked in?"*, *"List all Deluxe room guests"*, *"Any VIP guests?"*
+- Multi-turn conversation with full history
+- Quick suggestion chips for common queries
+- Animated typing indicator
 
 ---
 
-## 🗂️ Firestore Data Structure
+## 🛠️ Tech Stack
 
-**Collection:** `hotel_checkins`
-
-| Field         | Type        | Description                                  |
-|---------------|-------------|----------------------------------------------|
-| `clientName`  | `String`    | Name of the guest                            |
-| `roomType`    | `String`    | `Deluxe`, `Suite`, or `Standard`             |
-| `guestStatus` | `String`    | Guest category (e.g. VIP, Walk-in)           |
-| `photoBase64` | `String`    | Base64-encoded proof photo                   |
-| `lat`         | `double`    | GPS latitude                                 |
-| `lng`         | `double`    | GPS longitude                                |
-| `createdBy`   | `String`    | Group identifier (`HMS`)                     |
-| `proofLabel`  | `String`    | Auto-generated label (e.g. `HMS-Hotel-0430`) |
-| `createdAt`   | `Timestamp` | Server timestamp of submission               |
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Flutter SDK `>=3.0.0`
-- Firebase project with **Authentication** and **Firestore** enabled
-- `google-services.json` placed in `android/app/`
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/your-username/velour-grand.git
-cd velour-grand
-
-# Install dependencies
-flutter pub get
-
-# Run the app
-flutter run
-```
-
----
-
-## 📦 Dependencies
-
-```yaml
-dependencies:
-  firebase_core:
-  firebase_auth:
-  cloud_firestore:
-  firebase_storage:
-  image_picker:
-  geolocator:
-```
+| Technology | Usage |
+|------------|-------|
+| **Flutter** | UI framework (Android) |
+| **Dart** | Programming language |
+| **Firebase Auth** | User authentication |
+| **Cloud Firestore** | Real-time database / CRUD |
+| **Firebase Storage** | Photo storage |
+| **Geolocator** | GPS location capture |
+| **Image Picker** | Gallery photo selection |
+| **HTTP** | API calls to Groq AI |
+| **Groq API (LLaMA 3.1)** | AI summary report + chatbot |
 
 ---
 
@@ -121,40 +84,107 @@ dependencies:
 
 ```
 lib/
+├── main.dart                    # App entry point, Firebase init
+├── firebase_options.dart        # Firebase configuration
 └── screens/
-    ├── welcome_screen.dart
-    ├── login_screen.dart
-    ├── signup_screen.dart
-    ├── checkin_list_screen.dart
-    └── add_checkin_screen.dart
-
-assets/
-└── images/
-    └── velour_grand.png
+    ├── welcome_screen.dart      # Landing screen
+    ├── login_screen.dart        # Staff login
+    ├── signup_screen.dart       # Staff registration
+    ├── checkin_list_screen.dart # Main check-in list (CRUD)
+    ├── add_checkin_screen.dart  # Add new check-in form
+    ├── ai_summary_screen.dart   # AI business summary report
+    └── chatbot_screen.dart      # AI staff assistant chatbot
 ```
 
 ---
 
-## 🔐 Authentication Flow
+## 🚀 Getting Started
 
-```
-WelcomeScreen
-    ├── → LoginScreen  → CheckInListScreen
-    └── → SignUpScreen → LoginScreen
-```
+### Prerequisites
+- Flutter SDK `^3.10.7`
+- Android Studio or VS Code
+- A Firebase project
+- A free Groq API key from [console.groq.com](https://console.groq.com)
 
-From `CheckInListScreen`, tapping the logout icon signs the user out and returns to `WelcomeScreen`, clearing the navigation stack.
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/JayInigo/HMS-Ai-Summary-report.git
+   cd HMS-Ai-Summary-report
+   ```
+
+2. **Install dependencies**
+   ```bash
+   flutter pub get
+   ```
+
+3. **Set up Firebase**
+   - Add your own `google-services.json` to `android/app/`
+   - Add your own `firebase_options.dart` to `lib/`
+
+4. **Add your Groq API key**
+   - Open `lib/screens/ai_summary_screen.dart` and `lib/screens/chatbot_screen.dart`
+   - Replace `YOUR_GROQ_API_KEY` with your actual key
+
+5. **Run the app**
+   ```bash
+   flutter run
+   ```
+
+### Build APK
+```bash
+flutter build apk --release
+```
+APK will be located at `build/app/outputs/flutter-apk/app-release.apk`
 
 ---
 
-## 👥 Group
+## 📦 Dependencies
 
-**Group Name:** HMS
-**Hotel Brand:** Velour Grand
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  firebase_core: ^4.7.0
+  firebase_auth: ^6.4.0
+  cloud_firestore: ^6.3.0
+  firebase_storage: ^13.3.0
+  image_picker: ^1.2.1
+  geolocator: ^14.0.2
+  http: ^1.2.0
+```
+
+---
+
+## 📋 Course Topics Implemented
+
+| Topic | Implementation |
+|-------|----------------|
+| **Dart fundamentals** | Classes, async/await, state, controllers |
+| **Flutter widgets** | Scaffold, ListView, Card, Form, Stack, Column |
+| **Layout & design** | Gradients, responsive layout, custom UI |
+| **Multiple screens** | 7 screens with proper routing |
+| **State management** | `setState`, `StatefulWidget` |
+| **Form validation** | Validators on all sign-up fields |
+| **Firebase Auth** | Sign up, login, logout |
+| **Cloud Firestore** | Real-time CRUD with `StreamBuilder` |
+| **Firebase Storage** | Photo upload and deletion |
+| **Device features** | GPS via Geolocator, image picker |
+| **AI feature** | Groq API for summary report and chatbot |
+| **API integration** | HTTP calls to Groq REST API |
+
+---
+
+## ⚠️ Notes
+
+- The Groq API key is **not included** in this repository for security reasons.
+- Firebase credentials (`google-services.json`, `firebase_options.dart`) are also excluded..
+- The app is built and tested as an **Android mobile app**.
 
 ---
 
 ## 📄 License
 
-This project is for academic/internal use only.
-- `screenshots/storage_file.png` — Firebase Storage uploaded image
+This project was created for academic purposes as part of a Mobile Application Development course.
