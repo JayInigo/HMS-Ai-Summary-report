@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'add_checkin_screen.dart';
 import 'welcome_screen.dart';
 import 'ai_summary_screen.dart';
+import 'chatbot_screen.dart';
 
 class CheckInListScreen extends StatelessWidget {
   const CheckInListScreen({super.key});
@@ -134,6 +135,12 @@ class CheckInListScreen extends StatelessWidget {
         MaterialPageRoute(builder: (_) => const AiSummaryScreen()),
       ),
     ),
+    IconButton(
+    icon: const Icon(Icons.support_agent, color: Colors.white),
+    tooltip: 'Staff Chatbot',
+    onPressed: () => Navigator.push(
+      context, MaterialPageRoute(builder: (_) => const ChatbotScreen())),
+  ),
   ],
       ),
       floatingActionButton: FloatingActionButton.extended(
